@@ -8,16 +8,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wfb-ng
-PKG_VERSION:=24.08.2
+PKG_VERSION:=25.01.1
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
 
+# Хеш коммита для релиза 25.01.1
+PKG_SOURCE_VERSION:=0f2bc01cdda4af9f63d9c5b48874d3ccdf8a49c6
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_VERSION:=5423dfa6d8f72ae5f5bdeefadb321a94c0b82607
-PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_NAME)-$(PKG_VERSION)?
-PKG_HASH:=37f4daac10279d24b80a998d75cf321d8fc85560d7903cb6af17c1f67ac83fcf
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/v$(PKG_VERSION)?
+PKG_HASH:=skip
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
 
