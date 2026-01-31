@@ -15,10 +15,11 @@ PKG_LICENSE_FILES:=LICENSE
 
 PKG_SOURCE_VERSION:=1b88185409692ae49d2abf2142975e1390ac2392
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/v$(PKG_VERSION).tar.gz?
+PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_SOURCE_VERSION)?
 PKG_HASH:=70ee72f3c9c2eb71a8a014705ca6e46cdc911dc04a65a95adc2ce914312d26a3
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+
 PKG_BUILD_PARALLEL:=1
 PKG_MAINTAINER:=Ruixi Zhou <zhouruixi@gmail.com>
 
