@@ -2,7 +2,6 @@
 # Copyright (C) 2006-2025 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
 #
 
 include $(TOPDIR)/rules.mk
@@ -13,31 +12,34 @@ PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
 
+# Используем конкретный хеш коммита для версии 25.01.1
 PKG_SOURCE_VERSION:=1b88185409692ae49d2abf2142975e1390ac2392
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_SOURCE_VERSION)?
 PKG_HASH:=03cdd4248d3e12daddf2050b2fcefb51a66bf826d484958fa61151784da5d03a
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_NAME)-$(PKG_VERSION)
+# Магия для GitHub: распаковываем содержимое без вложенной папки с длинным хешем
+PKG_UNPACK=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
 PKG_MAINTAINER:=Ruixi Zhou <zhouruixi@gmail.com>
 
 include $(INCLUDE_DIR)/package.mk
 
-# Добавляем флаги, чтобы компилятор видел заголовочные файлы библиотек
+# Передаем пути к библиотекам через переменные окружения
 TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include
 TARGET_LDFLAGS += -L$(STAGING_DIR)/usr/lib
 
 define Build/Compile
-	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR)/$(MAKE_PATH) \
+	$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
 		$(MAKE_FLAGS) \
 		CC="$(TARGET_CC)" \
 		CXX="$(TARGET_CXX)" \
 		CFLAGS="$(TARGET_CFLAGS)" \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERSION=$(PKG_VERSION) COMMIT=$(PKG_SOURCE_VERSION) \
-		all_bin
+		all
 endef
 
 define Package/wfb-ng/default
@@ -66,7 +68,6 @@ define Package/wfb-tx-cmd
   TITLE+= wfb_tx_cmd
 endef
 
-# ИСПРАВЛЕНО: Добавлена зависимость +libevent2
 define Package/wfb-tun
   $(call Package/wfb-ng/default)
   DEPENDS:=+libsodium +libstdcpp +kmod-tun +libevent2
@@ -85,19 +86,13 @@ define Package/wfb-key
   TITLE+= wfb key used by FPVue
 endef
 
-# Основной пакет для наземки
 define Package/wfb-gs
   $(call Package/wfb-ng/default)
   DEPENDS:=+libpcap +libsodium +libstdcpp +wfb-rx +wfb-key +wfb-tun +wfb-tx-cmd
   TITLE+= groundstations (scripts and configs)
 endef
 
-# --- Блок CLI закомментирован для экономии места (требует Python) ---
-# define Package/wfb-cli
-#   $(call Package/wfb-ng/default)
-#   DEPENDS:=+python3-light +python3-msgpack
-#   TITLE+= wfb_cli (Status Dashboard)
-# endef
+# --- Установка бинарников ---
 
 define Package/wfb-rx/install
 	$(INSTALL_DIR) $(1)/usr/bin
@@ -145,12 +140,6 @@ define Package/wfb-gs/install
 	$(INSTALL_CONF) ./files/wfb-gs.config $(1)/etc/config/wfb-gs
 endef
 
-# --- Команда установки CLI также закомментирована ---
-# define Package/wfb-cli/install
-# 	$(INSTALL_DIR) $(1)/usr/bin
-# 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/wfb-cli $(1)/usr/bin/
-# endef
-
 $(eval $(call BuildPackage,wfb-rx))
 $(eval $(call BuildPackage,wfb-tx))
 $(eval $(call BuildPackage,wfb-tx-cmd))
@@ -158,4 +147,3 @@ $(eval $(call BuildPackage,wfb-tun))
 $(eval $(call BuildPackage,wfb-keygen))
 $(eval $(call BuildPackage,wfb-key))
 $(eval $(call BuildPackage,wfb-gs))
-# $(eval $(call BuildPackage,wfb-cli))
