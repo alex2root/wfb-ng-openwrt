@@ -39,7 +39,7 @@ define Build/Compile
 		CFLAGS="$(TARGET_CFLAGS)" \
 		LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERSION=$(PKG_VERSION) COMMIT=$(PKG_SOURCE_VERSION) \
-		all
+		all_bin
 endef
 
 define Package/wfb-ng/default
