@@ -70,7 +70,7 @@ endef
 
 define Package/wfb-tun
   $(call Package/wfb-ng/default)
-  DEPENDS:=+libsodium +libstdcpp +kmod-tun +libevent2
+  DEPENDS:=+libsodium +libstdcpp +kmod-tun +libevent2 +libevent2-core
   TITLE+= wfb_tun
 endef
 
