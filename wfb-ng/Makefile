@@ -10,15 +10,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=wfb-ng
 PKG_VERSION:=25.01.1
 PKG_RELEASE:=1
-PKG_LICENSE:=GPL-3.0
-PKG_LICENSE_FILES:=LICENSE
 
-# Хеш коммита для релиза 25.01.1
 PKG_SOURCE_VERSION:=0f2bc01cdda4af9f63d9c5b48874d3ccdf8a49c6
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/v$(PKG_VERSION)?
+PKG_SOURCE:=v$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/
 PKG_HASH:=skip
 
+# Важно: GitHub при распаковке v25.01.1 создаст папку wfb-ng-25.01.1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
