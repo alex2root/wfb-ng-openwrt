@@ -10,14 +10,19 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=wfb-ng
 PKG_VERSION:=25.01.1
 PKG_RELEASE:=1
+PKG_LICENSE:=GPL-3.0
+PKG_LICENSE_FILES:=LICENSE
 
-# Используем прямую ссылку на исходники через commit hash или конкретный релиз
-PKG_SOURCE:=wfb-ng-$(PKG_VERSION).tar.gz
+# Имя файла, который мы положили в папку dl
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+# Эту строку можно оставить, но она важна только для сборки из Git напрямую
+PKG_SOURCE_VERSION:=0f2bc01cdda4af9f63d9c5b48874d3ccdf8a49c6
 PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/v$(PKG_VERSION).tar.gz?
+# Сюда впиши хеш, который выдаст система (Got: ...)
 PKG_HASH:=skip
 
-# GitHub упаковывает файлы в папку с названием "wfb-ng-25.01.1" (без v)
-PKG_BUILD_DIR:=$(BUILD_DIR)/wfb-ng-$(PKG_VERSION)
+# ВНИМАНИЕ: Исправляем путь. В версии 25.01.1 папка называется просто wfb-ng-25.01.1
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
 
