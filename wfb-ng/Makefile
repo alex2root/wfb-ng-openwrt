@@ -11,13 +11,13 @@ PKG_NAME:=wfb-ng
 PKG_VERSION:=25.01.1
 PKG_RELEASE:=1
 
-PKG_SOURCE_VERSION:=0f2bc01cdda4af9f63d9c5b48874d3ccdf8a49c6
-PKG_SOURCE:=v$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/
+# Используем прямую ссылку на исходники через commit hash или конкретный релиз
+PKG_SOURCE:=wfb-ng-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/v$(PKG_VERSION).tar.gz?
 PKG_HASH:=skip
 
-# Важно: GitHub при распаковке v25.01.1 создаст папку wfb-ng-25.01.1
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+# GitHub упаковывает файлы в папку с названием "wfb-ng-25.01.1" (без v)
+PKG_BUILD_DIR:=$(BUILD_DIR)/wfb-ng-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
 
