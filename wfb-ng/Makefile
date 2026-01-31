@@ -13,20 +13,25 @@ PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
 
-# Имя файла, который мы положили в папку dl
+# Имя файла в папке dl
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-# Эту строку можно оставить, но она важна только для сборки из Git напрямую
-PKG_SOURCE_VERSION:=0f2bc01cdda4af9f63d9c5b48874d3ccdf8a49c6
+
+# Хеш коммита для версии 25.01.1 (взято из твоего git ls-remote)
+PKG_SOURCE_VERSION:=1b88185409692ae49d2abf2142975e1390ac2392
+
+# Ссылка (оставляем как запасной вариант, если файла нет в dl)
 PKG_SOURCE_URL:=https://github.com/svpcom/wfb-ng/archive/refs/tags/v$(PKG_VERSION).tar.gz?
-# Сюда впиши хеш, который выдаст система (Got: ...)
+
+# Сюда вставь результат команды sha256sum dl/wfb-ng-25.01.1.tar.gz
+# Если еще не считал, оставь skip, запусти сборку и скопируй то, что выдаст "Got:"
 PKG_HASH:=skip
 
-# ВНИМАНИЕ: Исправляем путь. В версии 25.01.1 папка называется просто wfb-ng-25.01.1
+# ПРАВИЛЬНЫЙ ПУТЬ: в новых версиях папка называется просто wfb-ng-25.01.1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_BUILD_PARALLEL:=1
 
-PKG_MAINTAINER:=Ruixi Zhou <zhouruixi@gmail.com>
+PKG_MAINTAINER:=Ruixi Zhou <zhouruixi@gmail.com>>
 
 include $(INCLUDE_DIR)/package.mk
 
