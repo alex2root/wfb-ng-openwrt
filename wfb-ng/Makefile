@@ -7,16 +7,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wfb-ng
-PKG_VERSION:=25.01.1
+PKG_VERSION:=25.01.2
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
 
 # Используем конкретный хеш коммита для версии 25.01.1
-PKG_SOURCE_VERSION:=1b88185409692ae49d2abf2142975e1390ac2392
+PKG_SOURCE_VERSION:=ec936d5153461b4b1c57ca90f732373170ecb37c
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_SOURCE_VERSION)?
-PKG_HASH:=03cdd4248d3e12daddf2050b2fcefb51a66bf826d484958fa61151784da5d03a
+PKG_HASH:=66f70ba66baea32a0d945732527ff25fa683c32158ed4da6fe99d602bc8a9416
 
 # Магия для GitHub: распаковываем содержимое без вложенной папки с длинным хешем
 PKG_UNPACK=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
