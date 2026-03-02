@@ -12,7 +12,7 @@ PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
 
-# Используем конкретный хеш коммита для версии 25.01.1
+# Используем конкретный хеш коммита для версии 25.01.2
 PKG_SOURCE_VERSION:=ec936d5153461b4b1c57ca90f732373170ecb37c
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_SOURCE_VERSION)?
