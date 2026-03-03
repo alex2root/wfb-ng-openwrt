@@ -16,7 +16,7 @@ PKG_LICENSE_FILES:=LICENSE
 PKG_SOURCE_VERSION:=ec936d5153461b4b1c57ca90f732373170ecb37c
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/svpcom/wfb-ng/tar.gz/$(PKG_SOURCE_VERSION)?
-PKG_HASH:=66f70ba66baea32a0d945732527ff25fa683c32158ed4da6fe99d602bc8a9416
+PKG_HASH:=8abc5494ec8cc7ba8bcf575cfc387f7b15e974f9f7c1001924a2d106cf764e35
 
 # Магия для GitHub: распаковываем содержимое без вложенной папки с длинным хешем
 PKG_UNPACK=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
